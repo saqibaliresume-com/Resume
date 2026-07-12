@@ -1,0 +1,587 @@
+
+    :root {
+      --primary: #2563eb;
+      --accent: #38bdf8;
+      --bg: #f8fafc;
+      --card: #ffffffcc;
+      --text: #0f172a;
+      --muted: #64748b;
+    }
+
+    body.dark {
+      --bg: #020617;
+      --card: #020617cc;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+    body {
+      background: linear-gradient(180deg, var(--bg), #e2e8f0);
+      color: var(--text);
+      transition: .4s ease;
+    }
+
+    header {
+      padding: 80px 20px 100px;
+      text-align: center;
+      background: radial-gradient(circle at top, #2563eb, #020617);
+      color: #fff;
+      position: relative;
+    }
+
+    .toggle {
+      position: absolute; top: 20px; right: 20px;
+      padding: 8px 16px; border-radius: 20px;
+      background: rgba(255,255,255,.15); cursor: pointer;
+      backdrop-filter: blur(10px);
+    }
+
+    header img {
+     width: 150px; 
+     height: 150px; 
+     border-radius: 50%;
+     margin-bottom: 18px;
+     /* Changed border color to solid white to separate it cleanly from the background banner image */
+     box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.85), 0 20px 40px rgba(0, 0, 0, 0.4);
+     transition: transform .4s ease, box-shadow .4s ease;
+     object-fit: cover; /* Ensures your profile image doesn't distort */
+    }
+
+    header img:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 0 0 8px rgba(56,189,248,.45), 0 30px 60px rgba(0,0,0,.35);
+    }
+
+    header h1 { font-size: 2.4rem; font-weight: 700; }
+    header p { opacity: .9; margin-top: 6px; }
+
+    .badge {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 16px;
+      border-radius: 40px;
+      background: rgba(255,255,255,.18);
+      backdrop-filter: blur(10px);
+      font-size: .85rem;
+      font-weight: 500;
+    }
+
+    .btn {
+      display: inline-block; margin-top: 22px;
+      padding: 12px 28px; border-radius: 30px;
+      background: linear-gradient(135deg, var(--accent), var(--primary));
+      color: #fff; text-decoration: none; font-weight: 500;
+      box-shadow: 0 10px 30px rgba(37,99,235,.4);
+    }
+
+    .container { max-width: 1100px; margin: -60px auto 0; padding: 20px; }
+
+    section {
+      background: var(--card);
+      backdrop-filter: blur(14px);
+      padding: 35px; margin-bottom: 30px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,.08);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    section:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 60px rgba(0,0,0,.15);
+    }
+
+    h2 {
+      font-size: 1.6rem; margin-bottom: 20px;
+      color: var(--primary);
+    }
+
+    .stats {
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 20px;
+    }
+
+    .stat {
+      text-align: center; padding: 20px;
+      border-radius: 16px; background: linear-gradient(135deg,#e0f2fe,#f8fafc);
+    }
+
+    .stat h3 { font-size: 2rem; color: var(--primary); }
+    .stat span { color: var(--muted); font-size: .9rem; }
+
+    .skills span {
+  display: inline-block;
+  margin: 8px;
+  padding: 10px 18px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  color: #ffffff;
+  font-size: .9rem;
+  transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
+}
+
+body.dark .skills span {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: #e5e7eb;
+  box-shadow: 0 6px 20px rgba(0,0,0,.6);
+}
+
+.skills span:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+    footer {
+      text-align: center; padding: 30px; font-size: .9rem;
+      color: var(--muted);
+    }
+  
+
+/* ===== Badge Typing Animation ===== */
+    .typing-badge {
+  min-width: 320px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+
+
+/* ===== Certificate Thumbnails ===== */
+
+.certificates {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+
+/* ===== Lightbox ===== */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(2,6,23,.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+
+.lightbox.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 16px;
+  box-shadow: 0 40px 120px rgba(0,0,0,.8);
+}
+
+/* =============================
+   VERTICAL EXPERIENCE SECTION LAYOUT
+============================= */
+section.experience {
+  display: flex;              
+  gap: 40px;                  
+  align-items: flex-start;    
+  margin-bottom: 50px;
+  flex-wrap: wrap;            
+}
+
+/* LEFT SIDE CONTENT */
+.exp-content {
+  flex: 1;                    
+}
+
+/* RIGHT SIDE CERTIFICATES */
+.exp-cert {
+  display: flex;
+  flex-direction: column;     
+  gap: 12px;
+  min-width: 180px;
+  padding-top: 20px;          
+}
+
+/* CERTIFICATE LABEL */
+.cert-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+
+/* =============================
+   RESPONSIVE
+============================= */
+@media (max-width: 900px) {
+  section.experience {
+    flex-direction: column;     
+  }
+
+  .exp-cert {
+    flex-direction: row;        
+    padding-top: 10px;
+  }
+}
+
+/* =============================
+   POPUP FOR FULL IMAGE
+============================= */
+#cert-modal {
+  display: none;              
+  position: fixed;            
+  top: 0; left: 0;            
+  width: 100%; height: 100%;  
+  background: rgba(0,0,0,0.8);
+  justify-content: center;    
+  align-items: center;        
+  z-index: 9999;
+}
+
+#cert-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+}
+
+#cert-modal:active {
+  display: flex;              
+}
+
+
+
+/* EDUCATION CERTIFICATE */
+section.education {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+}
+
+/* Left Column */
+.edu-content {
+  flex: 1;
+}
+
+/* Right Column */
+.edu-cert {
+  flex: 2;
+}
+
+/* Grid for Certificates */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 certificates in a row */
+  gap: 16px;
+  align-items: start;
+}
+
+/* Each certificate */
+.cert-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+
+
+/* ===================================
+   For All certificate and Thumbnails
+===================================== */
+.cert-thumb {
+  width: 120px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1.5px solid transparent;
+}
+
+.cert-thumb:hover {
+  transform: scale(1.05);
+  border-color: var(--accent);
+  box-shadow: 0 18px 45px rgba(0,0,0,.35);
+}
+
+/* Labels under certificates */
+.cert-item .cert-label {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* Responsive: stack on smaller screens */
+@media (max-width: 900px) {
+  section.education {
+    flex-direction: column;
+  }
+  .cert-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .cert-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+/* ===== Contact Section ===== */
+.contact {
+  background: var(--card);
+  backdrop-filter: blur(14px);
+  padding: 35px;
+  margin-bottom: 30px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.08);
+  transition: transform .3s ease, box-shadow .3s ease;
+  text-align: center;
+}
+
+.contact:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 60px rgba(0,0,0,.15);
+}
+
+.contact h2 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: var(--primary);
+}
+
+/* Horizontal contact items */
+.contact-items {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.contact-item {
+  font-size: 1rem;
+  text-decoration: none;
+  color: var(--text);
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  padding: 10px 20px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+/* Dark mode adjustments */
+body.dark .contact-item {
+  background: rgba(0,0,0,0.4);
+  color: var(--text);
+}
+body.dark .contact-item:hover {
+  color: #fff;
+}
+
+
+/*==========================
+            WhatsApp
+============================*/
+.whatsapp-float {
+  position: fixed;
+  bottom: 26px;
+  right: 26px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  box-shadow: 0 14px 35px rgba(37,211,102,.45);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.whatsapp-float svg {
+  width: 30px;
+  height: 30px;
+  fill: #ffffff;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.12);
+  box-shadow: 0 22px 50px rgba(37,211,102,.65);
+}
+
+/* 🌙 Dark Mode */
+body.dark .whatsapp-float {
+  background: linear-gradient(135deg, #0f766e, #022c22);
+  box-shadow: 0 14px 35px rgba(15,118,110,.6);
+}
+
+body.dark .whatsapp-float:hover {
+  box-shadow: 0 22px 55px rgba(15,118,110,.85);
+}
+/*==========================
+       WhatsApp End
+============================*/
+
+
+
+/* =====================================
+   MOBILE & TABLET RESPONSIVE FIX
+   (NO EXISTING CODE CHANGED)
+===================================== */
+
+/* ---------- Tablets (<= 1024px) ---------- */
+@media (max-width: 1024px) {
+
+  header {
+    padding: 60px 16px 80px;
+  }
+
+  .container {
+    margin-top: -40px;
+    padding: 16px;
+  }
+
+  section {
+    padding: 26px;
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+
+  .typing-badge {
+    min-width: auto;
+    padding: 8px 14px;
+  }
+
+  section.experience {
+    gap: 28px;
+  }
+
+  .exp-cert {
+    align-items: flex-start;
+  }
+}
+
+
+/* ---------- Mobile (<= 768px) ---------- */
+@media (max-width: 768px) {
+
+  header img {
+    width: 120px;
+    height: 120px;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  .badge {
+    font-size: 0.8rem;
+  }
+
+  .btn {
+    padding: 10px 22px;
+    font-size: 0.9rem;
+  }
+
+  section {
+    padding: 22px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  /* Stack experience properly */
+  section.experience {
+    flex-direction: column;
+  }
+
+  .exp-cert {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .cert-thumb {
+    width: 95px;
+  }
+
+  /* Education certificates */
+  .cert-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Skills pills wrap better */
+  .skills span {
+    margin: 6px;
+    font-size: 0.85rem;
+    padding: 8px 14px;
+  }
+
+  footer {
+    font-size: 0.8rem;
+    padding: 22px;
+  }
+}
+
+
+/* ---------- Small Mobile (<= 480px) ---------- */
+@media (max-width: 480px) {
+
+  header {
+    padding: 50px 14px 70px;
+  }
+
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  .typing-badge {
+    font-size: 0.75rem;
+  }
+
+  section {
+    padding: 18px;
+  }
+
+  .cert-thumb {
+    width: 85px;
+  }
+
+  .cert-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* WhatsApp button size */
+  .whatsapp-float {
+    width: 50px;
+    height: 50px;
+    bottom: 18px;
+    right: 18px;
+  }
+
+  .whatsapp-float svg {
+    width: 26px;
+    height: 26px;
+  }
+}
+/* =====================================
+   MOBILE & TABLET RESPONSIVE END
+===================================== */
